@@ -1,4 +1,4 @@
-// deadlock_resolution.c
+// deadlock_resolution source code implements a solution based on lock ordering
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
@@ -12,7 +12,7 @@ typedef struct {
 Account A = { .id = 1, .lock = PTHREAD_MUTEX_INITIALIZER };
 Account B = { .id = 2, .lock = PTHREAD_MUTEX_INITIALIZER };
 
-void lock_in_order(Account* a1, Account* a2) {
+void lock_in_order(Account* a1, Account* a2) { // addressing is used to determine a lock order
     if (a1 < a2) {
         pthread_mutex_lock(&a1->lock);
         pthread_mutex_lock(&a2->lock);
@@ -48,7 +48,7 @@ int main() {
 
     pthread_join(t1, NULL);
     pthread_join(t2, NULL);
-    printf("No deadlock occurred.\n");
+    printf("No deadlock occurred.\n"); // Output displays only if no deadlocking occurs
     return 0;
 }
 
